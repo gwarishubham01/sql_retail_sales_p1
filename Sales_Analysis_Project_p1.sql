@@ -36,18 +36,16 @@ WHERE
 -- Data Exploration
 -- How many sales we have?
 SELECT COUNT(*) as total_sales FROM retail_sales
-
 SELECT COUNT(DISTINCT customer_id) as total_sales FROM retail_sales
-
 SELECT DISTINCT category FROM retail_sales
 
 -- Data Analysis & Business key Problems & Answers
 
 -- Qns1: Write a SQL query to retrieve all columns for sales moade on "2022-11-05".
 
-SELECT *
-FROM retail_sales
-WHERE sale_date = '2022-11-05';
+SELECT * FROM retail_sales
+WHERE 
+	sale_date = '2022-11-05';
 
 -- Qns2: Write a SQl query to retrieve all transactions where the category is 'clothing' and the quantity said is more than or equal to 4 in the month of Nov- 2022.
 
@@ -60,25 +58,32 @@ WHERE
 -- Qns3: Write a SQL query to calculate the total sales for each category.
 
 SELECT
-category, 
-SUM(total_sale) as net_sales,
-COUNT(*) as total_orders
+	category, 
+	SUM(total_sale) as net_sales,
+	COUNT(*) as total_orders
 FROM retail_sales
 GROUP BY 1
 
 -- Qns4: Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.
 
-SELECT ROUND(AVG(age),2 ) as average_age FROM retail_sales
-WHERE category = 'Beauty';
+SELECT 
+	ROUND(AVG(age), 2) as average_age 
+FROM retail_sales
+WHERE 
+	category = 'Beauty';
 
 -- Qns5: Write a SQL query to find all transactions where the total_sale is greater than 1000.
 
 SELECT * FROM retail_sales
-WHERE total_sale>1000;
+WHERE 
+	total_sale>1000;
 
 -- Qns6: Write a SQL query to find the total number of transactions made by each gender in each category.
 
-SELECT category, gender, COUNT(total_sale) as total_number_of_transactions
+SELECT 
+	category, 
+	gender, 
+	COUNT(total_sale) as total_number_of_transactions
 FROM retail_sales
 group by category, gender;
 
@@ -102,14 +107,18 @@ WHERE rank = 1
 
 -- Qns8: Write a SQL query find the top 5 customers based on the highest total sales.
 
-SELECT customer_id, SUM(total_sale) as Total_sales FROM retail_sales
+SELECT 
+	customer_id, 
+	SUM(total_sale) as Total_sales FROM retail_sales
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
 
 -- Qns9: Write a SQL query to find number of unique customers who purchased items from each category.
 
-SELECT  category,COUNT(DISTINCT customer_id) FROM retail_sales
+SELECT  
+	category,
+	COUNT(DISTINCT customer_id) FROM retail_sales
 group by 1;
 
 -- Qns10: Write a SQL query to create each shift and number of orders (Example Morning <=12, Afternoon Between 12 & 17, evening >17).
